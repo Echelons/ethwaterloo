@@ -33,12 +33,14 @@ contract BindingTrustE is Mortal {
 
 contract TrustE is Mortal {
 
-  function initTrust(address _trustee) returns (address) {
-    if (msg.sender != _trustee) {
-      BindingTrustE binding = new BindingTrustE(_trustee);
-      return (binding);
-    }
-    return this;
+  event TrustAgreement(
+    address addr,
+    address ider
+  );
+
+  function initTrust(address _trustee) {
+    address addr = address(new BindingTrustE(_trustee));
+    TrustAgreement(addr, msg.sender);
   }
 
 }

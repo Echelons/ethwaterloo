@@ -4,33 +4,54 @@ solc = require('solc')
 
 web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
-deployHandler = (err, contract) => {
-  if(!err) {
-    // NOTE: The callback will fire twice!
-    // Once the contract has the transactionHash property set and once its deployed on an address.
-    // e.g. check tx hash on the first call (transaction send)
-    if(!contract.address) {
-      console.log("Transaction Hash")
-      console.log(contract.transactionHash) // The hash of the transaction, which deploys the contract
-    // check address on the second call (contract deployed)
-    } else {
-      console.log("Contract Address")
-      console.log(contract.address) // the contract address
-    }
-    // Note that the returned "myContractReturned" === "myContract",
-    // so the returned "myContractReturned" object will also get the address set.
-  }
+web3.eth.defaultAccount = web3.eth.accounts[1]
+
+createTruste = (contract, bytecode) => {
+  return new Promise((resolve, reject) => {
+    contract.new([], {data: bytecode, from: web3.eth.accounts[0], gas: 1000000}, (err, res) => {
+      if(!err) {
+        if(res.address) {
+          trusteInstance = trusteContract.at(res.address)
+          resolve(trusteInstance)
+        }
+      } else {
+        console.log(err)
+        reject("failed deploy")
+      }
+    })
+  })
+}
+
+initTrust = (instance) => {
+  return new Promise((resolve, reject) => {
+    let event = trusteInstance.TrustAgreement({ider: web3.eth.accounts[0]})
+    event.watch((err, res) => {
+      event.stopWatching()
+      resolve(res.args["addr"])
+    })
+    trusteInstance.initTrust(web3.eth.accounts[1], {from: web3.eth.accounts[0], gas: 1000000}, (err, res) => {
+      if(err) {
+        console.log(err)
+        reject("failed init")
+      }
+    })
+  })
 }
 
 // Compile
-trusteCode = fs.readFileSync('truste.sol').toString()
-trusteCompiledCode = solc.compile(code)
+code = fs.readFileSync('truste.sol').toString()
+compiledCode = solc.compile(code)
 
 trusteABI = JSON.parse(compiledCode.contracts[':TrustE'].interface)
-trusteContract = web3.eth.contract(abiDefinition)
+trusteContract = web3.eth.contract(trusteABI)
 trusteByteCode = compiledCode.contracts[':TrustE'].bytecode
-trusteDeployedContract = trusteContract.new([],{data: trusteByteCode, from: web3.eth.accounts[0], gas: 1000000}, deployHandler)
-trusteInstance = TrustEContract.at(trusteDeployedContract.address)
-
-bindingContractAddress = trusteInstance.initTrust(web3.eth.accounts[1])
-
+createTruste(trusteContract, trusteByteCode)
+.then((trusteInstance) => {
+  return initTrust(trusteInstance)
+})
+.then((bindingAddr) => {
+  bindingABI = JSON.parse(compiledCode.contracts[':BindingTrustE'].interface)
+  bindingContract = web3.eth.contract(bindingABI)
+  bindingInstance = bindingContract.at(bindingAddr)
+  console.log(bindingInstance.andInTheDarknessBindThem())
+})
