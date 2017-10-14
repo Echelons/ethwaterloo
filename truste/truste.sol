@@ -25,11 +25,12 @@ contract BindingTrustE is Mortal {
 
 contract TrustE is Mortal {
 
-  function initTrust(address _trustee) returns (address ) {
+  function initTrust(address _trustee) constant returns (address boundAddress) {
     if(msg.sender != _trustee) {
       BindingTrustE bound = new BindingTrustE(_trustee);
-      return bound;
+      return address(bound);
     }
+    return msg.sender;
   }
 
 }
