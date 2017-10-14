@@ -21,16 +21,24 @@ contract BindingTrustE is Mortal {
     trustee = _trustee;
   }
 
+  function andInTheDarknessBindThem() constant returns (bool) {
+    if (msg.sender == trustee) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }
 
 contract TrustE is Mortal {
 
-  function initTrust(address _trustee) constant returns (address boundAddress) {
-    if(msg.sender != _trustee) {
-      BindingTrustE bound = new BindingTrustE(_trustee);
-      return address(bound);
+  function initTrust(address _trustee) returns (address) {
+    if (msg.sender != _trustee) {
+      BindingTrustE binding = new BindingTrustE(_trustee);
+      return (binding);
     }
-    return msg.sender;
+    return this;
   }
 
 }
