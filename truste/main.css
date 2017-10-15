@@ -1,15 +1,41 @@
 /* CSS declarations go here */
 
 #wrapper {
-    width: 40%;
+    width: 60%;
     margin: 0 auto;
 	margin-top: 2.5%;
 	margin-bottom: 2.5%;
+	background-color: white;
 }
 
 #getTrust {
-	padding-top: 2.5%;
-	padding-bottom: 2.5%;
+
+}
+
+#header {
+	height: 10vh;
+	background-color: #ffe6e6;
+	text-align: center;
+}
+
+#footer {
+	height: 10vh;
+	background-color: #ffe6e6;
+	text-align: center;
+}
+
+.vertical {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+#frmLookup {
+	padding-top: 5%;
+}
+
+body {
+	background-color: #ebebeb !important;
 }
 
 .col {
@@ -24,7 +50,7 @@
 }
 
 input {
-    width: 90%;
+    width: 75%;
 }
 
 button, input, select, textarea {
@@ -38,13 +64,42 @@ button, input, select, textarea {
     padding: 12px 27px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    display: inline-block !important;
     font-size: 16px;
+	margin: 6px !important;
 }
- .green {
+
+.icon-holder{
+	display: inline-block;
+}
+
+.custom-icon {
+	font-size:40px !important;
+}
+
+/* #trust-true { display: none; } */
+/* #trust-false {display: none; } */
+
+ .greenbg {
 	 background-color: #4CAF50; 
  }
  
- .red {
+ .redbg {
 	 background-color: #f44336;
  }
+ 
+ .bluebg {
+	 background-color: blue;
+ } 
+	 
+ .green {
+	 color: #4CAF50; 
+ }
+ 
+ .red {
+	 color: #f44336;
+ }
+ 
+ .blue {
+	 color: blue;
+ } 
