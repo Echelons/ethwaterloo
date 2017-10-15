@@ -1,28 +1,40 @@
 <body>
   <div id ="wrapper" class="shadow">
+    <div id="header">
+    <h1 id="header-title" class="vertical">TrustE Demo</h1>
+    </div>
     <div class = "col">
 
-    <h1>TrustE</h1>
-
-    <form>
+    <form id="frmTrust">
       <h4>Enter Ethereum Address To Trust</h4>
       <input type="text" id="TrustAcct" name="TrustAcct">
     </form>
-    <button id="btnTrust" class="button green">Trust</button>
+    <button id="btnTrust" class="button bluebg">Trust</button> 
+    <button id="btnAccept" class="button greenbg">Accept</button>
     
-    <form>
+    <form id="frmLookup">
       <h4>Trusted Address Lookup</h4>
       <input type="text" id="TrustLookup" name="TrustLookup">
     </form>
-    <button id="btnLookup" class="button red">Lookup</button>
+    <button id="btnLookup" class="button redbg">Lookup</button>
     
-    <div id ="getTrust">
-      <div class="col">
+    <div class="col">
+      <div id ="getTrust">
         <h4>Address Trusted Status:</h4>
-        <span>0xa8730a296a4118201a08555b7488992ae4a4786cf5c007f339fd7eb3f31e4de6</span>
+          <div class="icon-holder" id="trust-true">
+            <i class="fa fa-check custom-icon green"></i>
+          </div>
+          <div class="icon-holder" id="trust-false">
+            <i class="fa fa-times custom-icon red"></i>
+          </div>
       </div>
     </div>
     
+    </div>
+    <div id="footer">
+    <div class="col-sm-4 vertical">a</div>
+    <div class="col-sm-4 vertical">b</div>
+    <div class="col-sm-4 vertical">c</div>
     </div>
   </div>
 </body>
