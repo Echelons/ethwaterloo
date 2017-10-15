@@ -55,7 +55,9 @@ bindTrust = (address, trusteInstance) => {
         reject(err)
       }
     })
-    bindingInstance.andInTheDarknessBindThem()
+    bindingInstance.andInTheDarknessBindThem((err, res) => {
+      console.log("happy days")
+    })
     setTimeout(() => {
       event.stopWatching()
       reject("no event")}, 30000)
@@ -76,17 +78,18 @@ createTrusteAgreement = (address, trusteInstance) => {
   })
 }
 
-checkTrust = (address) => {
-  
+checkTrust = (address, truste) => {
+  return truste.isTrusted(web3.eth.accounts[0], address)
 }
 
-var trusteInstance
+var trusteInstance = trusteContract.at("0xd75b1f585990b2a41b8043482b55f5f5593cd25d")
 
-createTruste(trusteContract, trusteByteCode)
-.then((res) => {
-  alert("trusteInstance created!")
-  trusteInstance = res
-})
+// createTruste(trusteContract, trusteByteCode)
+// .then((res) => {
+//   alert("trusteInstance created!")
+//   trusteInstance = res
+//   console.log(res)
+// })
 
 Template.body.events({
   'click #btnTrust'(event) {
@@ -125,17 +128,13 @@ Template.body.events({
   },
   'click #btnLookup'(event) {
     event.preventDefault()
-    let truster_address = document.getElementById("TrustAcct")
-    if(!truster_address) {
+    let trst_lkup = document.getElementById("TrustLookup").value
+    if(!trst_lkup) {
       alert("Please enter an address!")
+    } else if (web3.eth.accounts.length = 0) {
+      alert("Please enable metamask")
     } else {
-      bindTrust(truster_address)
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => {
-        alert("Contract failed to execute!")
-      })
+      console.log(checkTrust(trst_lkup, trusteInstance))
     }
   }
 })
