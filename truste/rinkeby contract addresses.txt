@@ -1,0 +1,7 @@
+TrustE: 0x0A951332ed354bc15A8Ff2550Df81d7A42Af37eC
+
+acct1: 0x168622EB0BDd1416A1cf0C4bC70BEa254c72AB1e
+acct2: 0x62508f7De7615FBAcf0b7C72033c6764844111A2
+acct3: 0xC2317c019D10a80dF22d35bd4399bAe948A78b21
+
+Binder json (last deploy): [ { "constant": false, "inputs": [], "name": "kill", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [], "name": "andInTheDarknessBindThem", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "name": "_trustee", "type": "address", "index": 0, "typeShort": "address", "bits": "", "displayName": "&thinsp;<span class=\"punctuation\">_</span>&thinsp;trustee", "template": "elements_input_address", "value": "0x62508f7De7615FBAcf0b7C72033c6764844111A2" }, { "name": "_truster", "type": "address", "index": 1, "typeShort": "address", "bits": "", "displayName": "&thinsp;<span class=\"punctuation\">_</span>&thinsp;truster", "template": "elements_input_address", "value": "0x168622EB0BDd1416A1cf0C4bC70BEa254c72AB1e" } ], "payable": false, "stateMutability": "nonpayable", "type": "constructor" } ]
