@@ -60,7 +60,7 @@ bindTrust = (address, trusteInstance) => {
     })
     setTimeout(() => {
       event.stopWatching()
-      reject("no event")}, 30000)
+      reject("no event")}, 10000)
   })
 }
 
@@ -95,6 +95,7 @@ Template.body.events({
   'click #btnTrust'(event) {
     event.preventDefault();
     let trustee_address = document.getElementById("TrustAcct").value
+    let trst_rslt = document.getElementById("trst")
     if(!trustee_address) {
       alert("Please enter an address!")
     } else if (web3.eth.accounts.length = 0) {
@@ -103,6 +104,8 @@ Template.body.events({
       createTrusteAgreement(trustee_address, trusteInstance)
       .then((res) => {
         bindingAddr = res
+        trst_rslt.style.color = "green"
+        trst_rslt.innerHTML = "Give " + bindingAddr + " to your TrustE"
         console.log(bindingAddr)
       })
     }
@@ -110,6 +113,7 @@ Template.body.events({
   'click #btnAccept'(event) {
     event.preventDefault();
     let bindAddr = document.getElementById("TrustAcct").value
+    let trst_rslt = document.getElementById("trst")
     if(!bindAddr) {
       alert("Please enter an address!")
     } else if (web3.eth.accounts.length = 0) {
@@ -118,10 +122,14 @@ Template.body.events({
       bindTrust(bindAddr, trusteInstance)
       .then((res) => {
         console.log(res)
+        trst_rslt.style.color = "green"
+        trst_rslt.innerHTML = "TrustE Accepted"
       }, (err) => {
         console.log(err)
       })
       .catch((err) => {
+        trst_rslt.style.color = "red"
+        trst_rslt.innerHTML = "Invalid TrustE"
         alert("Contract failed to execute!")
       })
     }
@@ -129,12 +137,19 @@ Template.body.events({
   'click #btnLookup'(event) {
     event.preventDefault()
     let trst_lkup = document.getElementById("TrustLookup").value
+    let trst_2 = document.getElementById("trst-2")
     if(!trst_lkup) {
       alert("Please enter an address!")
     } else if (web3.eth.accounts.length = 0) {
       alert("Please enable metamask")
     } else {
-      console.log(checkTrust(trst_lkup, trusteInstance))
+      if(checkTrust(trst_lkup, trusteInstance)) {
+        trst_2.style.color = "green"
+        trst_2.innerHTML = trst_lkup + " is trusted by " + web3.eth.accounts[0]
+      } else {
+        trst_2.style.color = "red"
+        trst_2.innerHTML = trst_lkup + " is NOT trusted by " + web3.eth.accounts[0]
+      }
     }
   }
 })
