@@ -1,25 +1,32 @@
-<head>
-  <title>eth-fe</title>
-</head>
-
 <body>
-  <h1>Welcome to Meteor!</h1>
+  <div id ="wrapper" class="shadow">
+    <div class = "col">
 
-  {{> hello}}
-  {{> info}}
+    <h1>TrustE</h1>
+
+    <form>
+      <h4>Enter Ethereum Address To Trust</h4>
+      <input type="text" id="TrustAcct" name="TrustAcct">
+    </form>
+    <button id="btnTrust" class="button green">Trust</button>
+    
+    <form>
+      <h4>Trusted Address Lookup</h4>
+      <input type="text" id="TrustLookup" name="TrustLookup">
+    </form>
+    <button id="btnLookup" class="button red">Lookup</button>
+    
+    <div id ="getTrust">
+      <div class="col">
+        <h4>Address Trusted Status:</h4>
+        <span>0xa8730a296a4118201a08555b7488992ae4a4786cf5c007f339fd7eb3f31e4de6</span>
+      </div>
+    </div>
+    
+    </div>
+  </div>
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
-
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
-  </ul>
+<template name="task">
+  <li>{{text}}</li>
 </template>

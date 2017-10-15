@@ -1,1 +1,50 @@
 /* CSS declarations go here */
+
+#wrapper {
+    width: 40%;
+    margin: 0 auto;
+	margin-top: 2.5%;
+	margin-bottom: 2.5%;
+}
+
+#getTrust {
+	padding-top: 2.5%;
+	padding-bottom: 2.5%;
+}
+
+.col {
+	padding: 2.5%;
+	text-align: center;
+}
+
+.shadow {
+  -moz-box-shadow:    3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow:         3px 3px 5px 6px #ccc;
+}
+
+input {
+    width: 90%;
+}
+
+button, input, select, textarea {
+	display: block !important;
+	margin: 0 auto !important;
+}
+
+.button {
+    border: none;
+    color: white;
+    padding: 12px 27px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+ .green {
+	 background-color: #4CAF50; 
+ }
+ 
+ .red {
+	 background-color: #f44336;
+ }

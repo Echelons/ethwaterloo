@@ -53,16 +53,21 @@ code = fs.readFileSync('truste.sol').toString()
 compiledCode = solc.compile(code)
 
 trusteABI = JSON.parse(compiledCode.contracts[':TrustE'].interface)
+console.log("ABI")
+console.log(trusteABI)
 trusteContract = web3.eth.contract(trusteABI)
 trusteByteCode = compiledCode.contracts[':TrustE'].bytecode
+console.log("ByteCode")
+console.log(trusteByteCode)
 createTruste(trusteContract, trusteByteCode)
 .then((trusteInstance) => {
   return initTrust(trusteInstance)
 })
 .then((bindingAddr) => {
-  console.log("BINDING ADDRESS HERE")
   bindingABI = JSON.parse(compiledCode.contracts[':BindingTrustE'].interface)
   bindingContract = web3.eth.contract(bindingABI)
+  console.log("ABI")
+  console.log(bindingABI)
   bindingInstance = bindingContract.at(bindingAddr)
   console.log(bindingInstance.andInTheDarknessBindThem())
 })
