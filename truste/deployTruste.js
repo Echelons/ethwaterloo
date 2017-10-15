@@ -24,16 +24,26 @@ createTruste = (contract, bytecode) => {
 
 initTrust = (instance) => {
   return new Promise((resolve, reject) => {
-    let event = trusteInstance.TrustAgreement({ider: web3.eth.accounts[0]})
+    let event = instance.TrustAgreement({ider: web3.eth.accounts[0]})
     event.watch((err, res) => {
       event.stopWatching()
       resolve(res.args["addr"])
     })
-    trusteInstance.initTrust(web3.eth.accounts[1], {from: web3.eth.accounts[0], gas: 1000000}, (err, res) => {
+    instance.initTrust(web3.eth.accounts[1], {from: web3.eth.accounts[0], gas: 1000000}, (err, res) => {
       if(err) {
         console.log(err)
         reject("failed init")
       }
+    })
+  })
+}
+
+bindTrust = (instance) => {
+  return new Promise((resolve, reject) => {
+    let event = instance.ForgeTrust({trste: web3.eth.accounts[1]})
+    event.watch((err, res) => {
+      event.stopWatching()
+      resolve(res.args)
     })
   })
 }
@@ -50,6 +60,7 @@ createTruste(trusteContract, trusteByteCode)
   return initTrust(trusteInstance)
 })
 .then((bindingAddr) => {
+  console.log("BINDING ADDRESS HERE")
   bindingABI = JSON.parse(compiledCode.contracts[':BindingTrustE'].interface)
   bindingContract = web3.eth.contract(bindingABI)
   bindingInstance = bindingContract.at(bindingAddr)
